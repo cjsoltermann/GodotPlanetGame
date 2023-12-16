@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://3x3l0v30yqej"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_yhjs2"]
+
+[sub_resource type="SystemFont" id="SystemFont_ymdhh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_07siu"]
+font = SubResource("SystemFont_ymdhh")
+font_size = 47
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_left = NodePath("CenterContainer/VBoxContainer/Start")
+focus_neighbor_top = NodePath("CenterContainer/VBoxContainer/Start")
+focus_neighbor_right = NodePath("CenterContainer/VBoxContainer/Start")
+focus_neighbor_bottom = NodePath("CenterContainer/VBoxContainer/Start")
+focus_next = NodePath("CenterContainer/VBoxContainer/Start")
+focus_previous = NodePath("CenterContainer/VBoxContainer/Start")
+focus_mode = 1
+script = ExtResource("1_yhjs2")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game"
+label_settings = SubResource("LabelSettings_07siu")
+horizontal_alignment = 1
+
+[node name="Start" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
