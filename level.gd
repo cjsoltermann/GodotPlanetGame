@@ -26,7 +26,8 @@ func _ready():
 		return ret
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	pass
-	#orbiting.position.x = 50*cos(Time.get_ticks_usec() / 10000000.0)
-	#orbiting.position.z = 50*sin(Time.get_ticks_usec() / 10000000.0)
+	#orbiting.position.x += delta
+	orbiting.position.x = 50*cos(Time.get_ticks_usec() / 10000000.0)
+	orbiting.position.z = 50*sin(Time.get_ticks_usec() / 10000000.0)

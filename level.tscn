@@ -20,27 +20,27 @@ shader_parameter/color = Color(0.607843, 0.180392, 0.745098, 1)
 [node name="Level" type="Node3D"]
 script = ExtResource("1_aorb1")
 
-[node name="Planet" type="CSGSphere3D" parent="."]
+[node name="Planet" type="AnimatableBody3D" parent="."]
+
+[node name="Mesh" type="CSGSphere3D" parent="Planet"]
 radius = 20.0
 radial_segments = 20
 rings = 20
 material = SubResource("ShaderMaterial_pomkf")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Planet"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet"]
 shape = SubResource("SphereShape3D_48lr5")
 
-[node name="Planet2" type="CSGSphere3D" parent="."]
+[node name="Planet2" type="AnimatableBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.454, 0.127258, 0.6548)
+
+[node name="Mesh" type="CSGSphere3D" parent="Planet2"]
 radius = 20.0
 radial_segments = 20
 rings = 20
 material = SubResource("ShaderMaterial_4r71l")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Planet2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet2"]
 shape = SubResource("SphereShape3D_48lr5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
