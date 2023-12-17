@@ -27,7 +27,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	pass
+	#pass
 	#orbiting.position.x += delta
-	orbiting.position.x = 50*cos(Time.get_ticks_usec() / 10000000.0)
-	orbiting.position.z = 50*sin(Time.get_ticks_usec() / 10000000.0)
+	var t = Time.get_ticks_usec() / 100000000.0
+	orbiting.position = Vector3(50*sin(t), 50*cos(t), 0)
