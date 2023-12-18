@@ -23,10 +23,10 @@ func _start_level():
 	_swap_scene.call_deferred(level)
 	debug_cam.clear_current.call_deferred()
 	
-func _on_create_server():
+func _on_create_server(port: int):
 	_start_level()
 	
-func _on_join_server():
+func _on_join_server(address: String, port: int):
 	_start_level()
 
 func _on_quit():

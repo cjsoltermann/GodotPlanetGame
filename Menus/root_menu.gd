@@ -42,12 +42,12 @@ func _process(delta):
 	pass
 
 
-func _on_create_button_pressed():
-	on_create.emit()
+func _on_create_button_pressed(port: int):
+	on_create.emit(port)
 
 
-func _on_join_button_pressed():
-	on_join.emit()
+func _on_join_button_pressed(address: String, port: int):
+	on_join.emit(address, port)
 
 
 func _on_quit_button_pressed():

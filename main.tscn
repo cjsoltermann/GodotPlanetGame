@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://yg14r2ygc0iu"]
+[gd_scene load_steps=3 format=3 uid="uid://yg14r2ygc0iu"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_cqsar"]
+[ext_resource type="Script" path="res://server.gd" id="2_70cy1"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_cqsar")
@@ -10,3 +11,6 @@ script = ExtResource("1_cqsar")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.877583, -0.229849, 0.420735, 0, 0.877583, 0.479426, -0.479426, -0.420735, 0.770151, 42.644, 48.5926, 78.0593)
 current = true
+
+[node name="Server" type="Node" parent="."]
+script = ExtResource("2_70cy1")
