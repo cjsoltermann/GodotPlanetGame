@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwst0xwhr3d88"]
+[gd_scene load_steps=9 format=3 uid="uid://bwst0xwhr3d88"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_ljweg"]
 [ext_resource type="Script" path="res://character_input.gd" id="2_gfafb"]
@@ -25,6 +25,14 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath("Body/Neck/Head:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bs220"]
+properties/0/path = NodePath(".:dir")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:sprinting")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="Character" type="CharacterBody3D"]
 script = ExtResource("1_ljweg")
@@ -79,3 +87,6 @@ replication_config = SubResource("SceneReplicationConfig_4pwib")
 
 [node name="CharacterInput" type="Node" parent="."]
 script = ExtResource("2_gfafb")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="CharacterInput"]
+replication_config = SubResource("SceneReplicationConfig_bs220")

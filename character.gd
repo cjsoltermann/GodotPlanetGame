@@ -1,8 +1,10 @@
+class_name Character
 extends CharacterBody3D
 
 @onready var head := $Body/Neck/Head
 @onready var camera: Camera3D = $Body/Neck/Head/Camera3D
 @onready var body := $Body
+@onready var input: CharacterInput = $CharacterInput
 
 @export var id := 1
 
@@ -29,12 +31,6 @@ func _ready():
 	set_process_input(id == multiplayer.get_unique_id())
 
 func _input(event):
-	if event.is_action_pressed("Release Mouse"):
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		#rotate_y(-event.relative.x / 100.0)
 		rotate(basis.y, -event.relative.x / 150.0)
@@ -64,22 +60,8 @@ func _physics_process(delta):
 	else:
 		cur_speed = speed
 	
-	var dir := Vector3.ZERO
+	var dir := basis * input.dir
 	
-	if Input.is_action_pressed("Forward"):
-		#velocity += cur_speed * basis.z
-		dir += basis.z
-	elif Input.is_action_pressed("Backward"):
-		#velocity -= cur_speed * basis.z
-		dir -= basis.z
-		
-	if Input.is_action_pressed("Left"):
-		#velocity += cur_speed * basis.x
-		dir += basis.x
-	elif Input.is_action_pressed("Right"):
-		#velocity -= cur_speed * basis.x
-		dir -= basis.x
-		
 	dir *= cur_speed
 	velocity += dir
 	
@@ -88,14 +70,12 @@ func _physics_process(delta):
 	if is_on_floor():
 		has_double = true
 	
-	if Input.is_action_just_pressed("Jump"):
-		if is_on_floor():
+func jump():
+	if is_on_floor():
 			velocity += jump_power * basis.y
-		elif has_double:
-			velocity += jump_power * basis.y
-			has_double = false
-		
-	
+	elif has_double:
+		velocity += jump_power * basis.y
+		has_double = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
