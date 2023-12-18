@@ -9,7 +9,8 @@ subpixel_positioning = 0
 font = SubResource("SystemFont_ymdhh")
 font_size = 47
 
-[node name="MainMenu" type="CenterContainer"]
+[node name="MainMenu" type="Control"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,27 +18,34 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ceeca")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+offset_left = 509.0
+offset_top = 239.0
+offset_right = 642.0
+offset_bottom = 409.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
 
-[node name="GameLabel" type="Label" parent="VBoxContainer"]
+[node name="GameLabel" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Game"
 label_settings = SubResource("LabelSettings_07siu")
 horizontal_alignment = 1
 
-[node name="CreateButton" type="Button" parent="VBoxContainer"]
+[node name="CreateButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Create Server"
 
-[node name="JoinButton" type="Button" parent="VBoxContainer"]
+[node name="JoinButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Join Server"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="VBoxContainer/CreateButton" to="." method="_on_create_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/CreateButton" to="." method="_on_create_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

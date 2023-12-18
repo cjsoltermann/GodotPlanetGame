@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://3x3l0v30yqej"]
+[gd_scene load_steps=5 format=3 uid="uid://3x3l0v30yqej"]
 
 [ext_resource type="Script" path="res://Menus/root_menu.gd" id="1_0jvwu"]
+[ext_resource type="PackedScene" uid="uid://biknb06mj4bk7" path="res://Menus/main_menu.tscn" id="2_tp1qe"]
+[ext_resource type="PackedScene" uid="uid://b14m7xb3iy2ic" path="res://Menus/server_creation.tscn" id="3_nmpu4"]
+[ext_resource type="PackedScene" uid="uid://b1wq0i60r4kvs" path="res://Menus/server_selection.tscn" id="4_jsenm"]
 
 [node name="RootMenu" type="Control"]
 layout_mode = 3
@@ -12,4 +15,25 @@ grow_vertical = 2
 focus_mode = 1
 script = ExtResource("1_0jvwu")
 
-[node name="CurrentMenu" type="Node" parent="."]
+[node name="MainMenu" parent="." instance=ExtResource("2_tp1qe")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="ServerCreation" parent="." instance=ExtResource("3_nmpu4")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 576.0
+offset_top = 324.0
+offset_right = 576.0
+offset_bottom = 324.0
+
+[node name="ServerSelection" parent="." instance=ExtResource("4_jsenm")]
+visible = false
+layout_mode = 1

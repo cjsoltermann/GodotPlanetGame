@@ -1,4 +1,4 @@
-extends CenterContainer
+extends Control
 
 signal on_join
 signal on_create

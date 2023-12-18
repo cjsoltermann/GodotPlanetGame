@@ -16,11 +16,18 @@ var current_scene: Node = menu
 func _ready():
 	world.add_child(menu)
 	menu.on_create.connect(_on_create_server)
+	menu.on_join.connect(_on_join_server)
 	
-func _on_create_server():
+func _start_level():
 	level = level_scene.instantiate()
 	_swap_scene.call_deferred(level)
 	debug_cam.clear_current.call_deferred()
+	
+func _on_create_server():
+	_start_level()
+	
+func _on_join_server():
+	_start_level()
 
 func _on_quit():
 	get_tree().quit()

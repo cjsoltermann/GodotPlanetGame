@@ -1,7 +1,7 @@
 extends Control
 
 signal on_back
-signal on_start
+signal on_join
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,7 +14,7 @@ func _process(delta):
 
 
 func _on_start_button_pressed():
-	on_start.emit()
+	on_join.emit()
 
 
 func _on_back_button_pressed():
