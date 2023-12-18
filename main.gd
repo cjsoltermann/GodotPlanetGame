@@ -21,16 +21,17 @@ func _ready():
 	
 func _start_level():
 	level = level_scene.instantiate()
+	level.server = server
 	_swap_scene.call_deferred(level)
 	debug_cam.clear_current.call_deferred()
 	
 func _on_create_server(port: int):
 	server.start_server(port)
-	_start_level()
+	_start_level.call_deferred()
 	
 func _on_join_server(address: String, port: int):
 	server.join_server(address, port)
-	_start_level()
+	_start_level.call_deferred()
 
 func _on_quit():
 	get_tree().quit()

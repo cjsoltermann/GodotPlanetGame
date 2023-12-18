@@ -1,6 +1,9 @@
 extends CharacterBody3D
 
 @onready var head := $Body/Neck/Head
+@onready var camera: Camera3D = $Body/Neck/Head/Camera3D
+
+@export var id := 1
 
 @export var speed := 10
 @export var sprint_speed := 20
@@ -14,6 +17,14 @@ var get_closest_body: Callable
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	set_multiplayer_authority(id)
+	if id == multiplayer.get_unique_id():
+		camera.make_current()
+	
+	set_process(id == multiplayer.get_unique_id())
+	set_physics_process(id == multiplayer.get_unique_id())
+	set_process_input(id == multiplayer.get_unique_id())
 
 func _input(event):
 	if event.is_action_pressed("Release Mouse"):

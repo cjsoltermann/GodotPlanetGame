@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://l314l74afmjt"]
+[gd_scene load_steps=6 format=3 uid="uid://l314l74afmjt"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_aorb1"]
 [ext_resource type="Shader" path="res://world.gdshader" id="1_c6xud"]
-[ext_resource type="PackedScene" uid="uid://bwst0xwhr3d88" path="res://character.tscn" id="3_e1d0x"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pomkf"]
 render_priority = 0
@@ -45,6 +44,4 @@ shape = SubResource("SphereShape3D_48lr5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 
-[node name="Character" parent="." instance=ExtResource("3_e1d0x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.43491, 21.4019, 0)
-jump_power = 45
+[node name="Players" type="Node3D" parent="."]

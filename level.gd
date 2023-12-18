@@ -1,13 +1,19 @@
 extends Node3D
 
-@onready var character := $Character
+var character_scene := preload("res://character.tscn")
+@onready var player_root := $Players
 
 @onready var planets: Array[Node3D] = [$Planet, $Planet2]
 
 @onready var orbiting := $Planet2
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+var server: Server
+
+func add_character(id: int):
+	var character = character_scene.instantiate()
+	character.id = id
+	character.name = "Player%s" % id
+	
 	character.get_gravity = func (pos: Vector3) -> Vector3:
 		var ret := Vector3.ZERO
 		for planet in planets:
@@ -24,6 +30,17 @@ func _ready():
 				dist = d
 				ret = planet
 		return ret
+	
+	player_root.add_child(character, true)
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	add_character(multiplayer.get_unique_id())
+	for id in multiplayer.get_peers():
+		add_character(id)
+		
+	server.on_player_connected.connect(add_character)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
