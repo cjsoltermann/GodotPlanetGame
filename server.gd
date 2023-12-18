@@ -1,3 +1,4 @@
+class_name Server
 extends Node
 
 @onready var world := $"../World"

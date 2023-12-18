@@ -1,5 +1,6 @@
 extends Node3D
 
+@onready var server: Server = $Server
 @onready var debug_cam := $Camera3D
 
 var menu_scene := preload("res://Menus/root_menu.tscn")
@@ -24,9 +25,11 @@ func _start_level():
 	debug_cam.clear_current.call_deferred()
 	
 func _on_create_server(port: int):
+	server.start_server(port)
 	_start_level()
 	
 func _on_join_server(address: String, port: int):
+	server.join_server(address, port)
 	_start_level()
 
 func _on_quit():
