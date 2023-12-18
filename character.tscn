@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwst0xwhr3d88"]
+[gd_scene load_steps=8 format=3 uid="uid://bwst0xwhr3d88"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_ljweg"]
+[ext_resource type="Script" path="res://character_input.gd" id="2_gfafb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vq7sj"]
 albedo_color = Color(0, 0, 0, 1)
@@ -55,12 +56,18 @@ material = SubResource("StandardMaterial3D_mb56s")
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
 near = 0.6
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Body"]
-transform = Transform3D(0.938962, -0.34402, 0, 0.34402, 0.938962, 0, 0, 0, 1, 1, 1, 0)
+[node name="LeftShoulder" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.668555, 0)
+
+[node name="LeftArm" type="CSGBox3D" parent="Body/LeftShoulder"]
+transform = Transform3D(0.938962, -0.34402, 0, 0.34402, 0.938962, 0, 0, 0, 1, 0.7, 0.3, 0)
 size = Vector3(1.545, 0.2, 0.2)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Body"]
-transform = Transform3D(0.939094, 0.34366, 0, -0.34366, 0.939094, 0, 0, 0, 1, -1, 1, 0)
+[node name="RightShoulder" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.668555, 0)
+
+[node name="RightArm" type="CSGBox3D" parent="Body/RightShoulder"]
+transform = Transform3D(0.939094, 0.34366, 0, -0.34366, 0.939094, 0, 0, 0, 1, -0.7, 0.3, 0)
 size = Vector3(1.545, 0.2, 0.2)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -69,3 +76,6 @@ shape = SubResource("BoxShape3D_j3w6v")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4pwib")
+
+[node name="CharacterInput" type="Node" parent="."]
+script = ExtResource("2_gfafb")

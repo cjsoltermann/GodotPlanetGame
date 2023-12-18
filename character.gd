@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @onready var head := $Body/Neck/Head
 @onready var camera: Camera3D = $Body/Neck/Head/Camera3D
+@onready var body := $Body
 
 @export var id := 1
 
@@ -21,6 +22,7 @@ func _ready():
 	set_multiplayer_authority(id)
 	if id == multiplayer.get_unique_id():
 		camera.make_current()
+		body.hide()
 	
 	set_process(id == multiplayer.get_unique_id())
 	set_physics_process(id == multiplayer.get_unique_id())
