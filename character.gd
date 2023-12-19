@@ -25,17 +25,6 @@ func _ready():
 	if id == multiplayer.get_unique_id():
 		camera.make_current()
 		body.hide()
-	
-	set_process(id == multiplayer.get_unique_id())
-	set_physics_process(id == multiplayer.get_unique_id())
-	set_process_input(id == multiplayer.get_unique_id())
-
-func _input(event):
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		#rotate_y(-event.relative.x / 100.0)
-		rotate(basis.y, -event.relative.x / 150.0)
-		head.rotate_x(event.relative.y / 150.0)
-		orthonormalize()
 
 func _physics_process(delta):
 	apply_floor_snap()
@@ -70,13 +59,10 @@ func _physics_process(delta):
 	if is_on_floor():
 		has_double = true
 	
+@rpc("call_local", "reliable")
 func jump():
 	if is_on_floor():
 			velocity += jump_power * basis.y
 	elif has_double:
 		velocity += jump_power * basis.y
 		has_double = false
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
