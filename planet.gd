@@ -32,4 +32,4 @@ func _physics_process(delta):
 		#var t = Time.get_ticks_usec() / 100000000.0
 		#position = Vector3(orbit_speed*sin(t), orbit_speed*cos(t), 0)
 		if orbiting:
-			position += Vector3(orbit_speed*cos(delta), -orbit_speed*sin(delta), 0)
+			position += Vector3(orbit_speed*delta*-position.y, orbit_speed*delta*position.x, 0)
