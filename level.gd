@@ -3,9 +3,7 @@ extends Node3D
 var character_scene := preload("res://character.tscn")
 @onready var player_root := $Players
 
-@onready var planets: Array[Node3D] = [$Planet, $Planet2]
-
-@onready var orbiting := $Planet2
+@onready var planets: Node3D = $Planets
 
 var server: Server
 
@@ -16,15 +14,15 @@ func add_character(id: int):
 	
 	character.get_gravity = func (pos: Vector3) -> Vector3:
 		var ret := Vector3.ZERO
-		for planet in planets:
+		for planet: Planet in planets.get_children():
 			var dir := planet.position - pos
-			ret += dir * (50.0 / dir.length_squared())
+			ret += dir * (planet.mass / dir.length_squared())
 		return ret
 		
 	character.get_closest_body = func (pos: Vector3) -> Node3D:
 		var dist := INF
-		var ret := planets[0]
-		for planet in planets:
+		var ret := planets.get_child(0)
+		for planet: Planet in planets.get_children():
 			var d := (planet.position - pos).length_squared()
 			if (d < dist):
 				dist = d
@@ -41,10 +39,3 @@ func _ready():
 		add_character(id)
 		
 	server.on_player_connected.connect(add_character)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	#pass
-	#orbiting.position.x += delta
-	var t = Time.get_ticks_usec() / 100000000.0
-	orbiting.position = Vector3(50*sin(t), 50*cos(t), 0)
