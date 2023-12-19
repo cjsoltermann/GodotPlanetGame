@@ -1,9 +1,9 @@
 class_name Character
 extends CharacterBody3D
 
-@onready var head := $Body/Neck/Head
+@onready var head: Node3D = $Body/Neck/Head
 @onready var camera: Camera3D = $Body/Neck/Head/Camera3D
-@onready var body := $Body
+@onready var body: Node3D = $Body
 @onready var input: CharacterInput = $CharacterInput
 
 @export var id := 1
@@ -21,7 +21,7 @@ var get_closest_body: Callable
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-	set_multiplayer_authority(id)
+	body.set_multiplayer_authority(id)
 	if id == multiplayer.get_unique_id():
 		camera.make_current()
 		body.hide()
@@ -44,12 +44,12 @@ func _physics_process(delta):
 	velocity -= basis.z * velocity.dot(basis.z)
 	
 	var cur_speed: float
-	if Input.is_action_pressed("Sprint"):
+	if input.sprinting:
 		cur_speed = sprint_speed
 	else:
 		cur_speed = speed
 	
-	var dir := basis * input.dir
+	var dir := basis * body.basis * input.dir
 	
 	dir *= cur_speed
 	velocity += dir
@@ -59,10 +59,20 @@ func _physics_process(delta):
 	if is_on_floor():
 		has_double = true
 	
-@rpc("call_local", "reliable")
+@rpc("any_peer", "call_local", "reliable")
 func jump():
+	if multiplayer.get_remote_sender_id() != id:
+		return
 	if is_on_floor():
-			velocity += jump_power * basis.y
+		velocity += jump_power * basis.y
 	elif has_double:
 		velocity += jump_power * basis.y
 		has_double = false
+
+@rpc("any_peer", "call_local", "unreliable")
+func head_move(delta_x: float, delta_y: float):
+	if multiplayer.get_remote_sender_id() != id:
+		return
+	body.rotate(body.basis.y, -delta_x / 150.0)
+	head.rotate_x(delta_y / 150.0)
+	body.orthonormalize()

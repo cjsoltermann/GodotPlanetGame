@@ -39,8 +39,10 @@ func _input(event):
 	elif event.is_action_pressed("Jump"):
 		character.jump.rpc()
 		
-	elif event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		#rotate_y(-event.relative.x / 100.0)
-		character.rotate(character.basis.y, -event.relative.x / 150.0)
-		character.head.rotate_x(event.relative.y / 150.0)
-		character.orthonormalize()
+	elif event.is_action_pressed("Sprint"):
+		sprinting = true
+	elif event.is_action_released("Sprint"):
+		sprinting = false
+		
+	elif event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED: 
+		character.head_move.rpc(event.relative.x, event.relative.y)
