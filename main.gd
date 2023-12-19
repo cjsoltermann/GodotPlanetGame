@@ -45,10 +45,6 @@ func _swap_scene(new: Node, free_old: bool = true):
 	world.add_child(new)
 	current_scene = new
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func _input(event):
 	if event.is_action_pressed("debug_cam"):
 		if (debug_cam.current):

@@ -37,10 +37,6 @@ func _show_menu(menu):
 	menu.show()
 	current_menu = menu
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 
 func _on_create_button_pressed(port: int):
 	on_create.emit(port)

@@ -26,7 +26,7 @@ func _ready():
 		camera.make_current()
 		body.hide()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	apply_floor_snap()
 	if get_gravity:
 		var gravity: Vector3 = get_gravity.call(position)

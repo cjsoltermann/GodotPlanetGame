@@ -12,19 +12,6 @@ extends AnimatableBody3D
 @export var orbit_speed := 50.0
 @export var mass := 25
 
-func _ready():
-	if Engine.is_editor_hint():
-		pass
-	if not Engine.is_editor_hint():
-		pass
-
-func _process(delta):
-	if Engine.is_editor_hint():
-		pass
-	if not Engine.is_editor_hint():
-		pass
-
-
 func _physics_process(delta):
 	if Engine.is_editor_hint():
 		pass

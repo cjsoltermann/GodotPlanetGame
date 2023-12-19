@@ -30,7 +30,3 @@ func _on_peer_connected(id):
 	
 func _on_peer_disconnected(id):
 	on_player_disconnected.emit(id)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
