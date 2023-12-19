@@ -3,7 +3,7 @@ extends Control
 signal on_back
 signal on_create
 
-@onready var port_edit: LineEdit = $CenterContainer/VBoxContainer/PortEdit
+@export var port_edit: LineEdit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +20,6 @@ func _on_back_button_pressed():
 
 
 func _on_start_button_pressed():
-	if not port_edit.text.is_valid_int():
-		return
-	on_create.emit(port_edit.text.to_int())
+	var port = port_edit.text if not port_edit.text.is_empty() else port_edit.placeholder_text
+	if port.is_valid_int():
+		on_create.emit(port.to_int())
